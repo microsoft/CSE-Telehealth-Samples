@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Skype VDI Connector (Desktop)";
+}
+
+@section scripts {
+    <script src="https://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-2.2.1.min.js"></script>
+    @Scripts.Render("~/signalr/hubs")
+    @Scripts.Render("~/Scripts/vdi.js")
+}
+
+@Html.Partial("_Navbar")
+
+<div class="jumbotron">
+    <h1>Signaling (desktop)</h1>
+    <p class="lead">Open this page on your desktop device.</p>
+</div>
+
+
+<div class="row">
+    <iframe id="frame" style="display: none;"></iframe>
+</div>

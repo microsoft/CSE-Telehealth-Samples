@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Skype VDI Connector (virtual)";
+}
+
+@section scripts {
+    <script src="https://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-2.2.1.min.js"></script>
+    @Scripts.Render("~/signalr/hubs")
+    @Scripts.Render("~/Scripts/vdi.js")
+}
+
+@Html.Partial("_Navbar")
+
+<div class="jumbotron">
+    <h1>Signaling (VDI)</h1>
+    <p class="lead">Open this page in your virtual environment.</p>
+</div>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <input type="text" id="msg" placeholder="enter a message" />
+        <button type="submit" id="send">Send</button>
+    </div>
+    <div class="col-md-4">
+        <ul id="messages"></ul>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>

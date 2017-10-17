@@ -1,0 +1,197 @@
+﻿@{
+    ViewBag.Title = "Meeting";
+}
+
+@section styles {
+    @Styles.Render("~/Content/skypestyle.css")
+    @Styles.Render("~/Content/multivideo.css")
+}
+
+@section scripts {
+    <script type="text/javascript" src="https://swx.cdn.skype.com/shared/v/1.2.15/SkypeBootstrap.min.js"></script>
+    @Scripts.Render("~/Scripts/skype.js")
+    <script src="~/Scripts/multivideo.js"></script>
+    <script src="~/Scripts/meeting.js"></script>
+}
+
+@Html.Partial("_MeetingConfigPartial")
+
+<div id="skype-cc"></div>
+<div ng-app="myApp" style="margin-bottom: 75px">
+    <div id="loadingImage" >
+        <img style="padding-top:20%;padding-left:40%" src="~/Content/Images/loading_comments.gif" />
+    </div>
+    <div id="displayAllElements" style="display: none;">
+        <div id="landingContent" style="background-color: #ccc;position: relative; bottom: 50px">
+            <div id="loading-content" style="padding-top:100px;">
+                <div id="loadingText1" class="landing-text">
+                    We will start your virtual visit soon. Please wait for a health care professional.
+                </div>
+                <div style="text-align:center;padding-top:300px;">
+                    <img src="~/Content/Images/logo-product.png" style="padding-right:100px;" />
+                    <img src="~/Content/Images/conference-arrow.png" style="padding-right:100px;" />
+                    <img src="~/Content/Images/logo-company.png" style="padding-right:100px;" />
+                </div>
+            </div>
+        </div>
+        <div id="allVideoControls" style="padding-top:40px;display:none;" class="container body-content">
+            <h2>Conference</h2>
+            <div style="display:table;width:100%;table-layout:fixed;">
+                <div style="display:table-row;">
+                    <div style="display:table-cell;">
+                        <div style="display:table;width:100%;table-layout:fixed;">
+                            <div style="display:table-row;">
+                                <div id="divCallControl" style="display:table-cell;width:80%;position:relative;">
+                                    <div id="callControlsWrapper" style="height:514px;">
+                                        <div id="videoControl" style="height: 100%;background: gray no-repeat; background-size: cover;">
+                                            <div id="loading-content" class="loading-content">
+                                                <div id="loadingText" class="loading-text"></div>
+                                            </div>
+                                            <div id="videoWindow" style="width:100%;height: 100%; background:gray; position: absolute; display: none;">
+                                                <div class="mv-video" id="video0" style="height: 100%;">
+                                                    <div id="video0Name" class="videoName"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="callControls" class="block height-fill no-pad callControls" style="background: #333333;margin-top: -1px;height: 50px;position: absolute; bottom: -50px; width: 100%;">
+                                            <div id="callButtons" class="block flex-container" style="text-align:center; padding-top: 5px;">
+                                                <a id="btn-start-video" class="iconfont videoOn" title="Start Video"></a>
+                                                <a id="btn-stop-video" class="iconfont videoOff" title="Stop Video" style="display: none;"></a>
+                                                <a id="btn-mute" class="iconfont mic-on" title="Mute"></a>
+                                                <a id="btn-unmute" class="iconfont mic-off" title="Unmute" style="display: none;"></a>
+                                                <a id="hang-up" class="iconfont hang-up" title="Hang up"></a>
+                                                <a id="btnMaxScreen" class="iconfont fullscreenOn" title="Maximize screen"></a>
+                                                <a id="btnMinScreen" class="iconfont fullscreenOff" title="Minimize screen" style="display:none;"></a>
+                                                <img id="btnShowDevices" title="Set Devices" style="" src="~/Content/Images/set-devices.png" />
+                                                <a id="btnChatService" class="iconfont chat" title="Start Chat" style=""></a>
+
+
+                                                @*<img id="btn-start-video" title="Start Video" style="width:30px;padding-bottom:30px;cursor:pointer;margin-right:5px;" src="~/Content/Images/no-video.png" />
+                                                    <img id="btn-stop-video" title="Stop Video" style="display:none;width:30px;padding-bottom:30px;cursor:pointer;margin-right:5px;" src="~/Content/Images/video.png" />
+                                                    <img id="btn-hideothers-video" title="Hide Video" style="display: none;width:30px;padding-bottom:30px;cursor:pointer;margin-right:5px;" src="~/Content/Images/hide-others-vid.png" />
+                                                    <img id="btn-showothers-video" title="Render Video" style="width:30px;padding-bottom:30px;cursor:pointer;margin-right:5px;" src="~/Content/Images/show-others-vid.png" />
+                                                    <img id="btn-mute" title="Mute" style="width:30px;padding-bottom:30px;cursor:pointer;margin-right:5px;" src="~/Content/Images/un-mute.png" />
+                                                    <img id="btn-unmute" title="Unmute" style="display: none;width:30px;padding-bottom:30px;cursor:pointer;margin-right:5px;" src="~/Content/Images/mute.png" />
+                                                    <img id="hang-up" title="Hang Up" style="width:30px;padding-bottom:30px;cursor:pointer;margin-right:5px;" src="~/Content/Images/call-end.png" />
+                                                    <img id="btnMaxScreen" title="Maiximize Screen" style="width:30px;padding-bottom:30px;cursor:pointer;margin-right:5px;" src="~/Content/Images/maximize.png" />
+                                                    <img id="btnMinScreen" title="Minimize Screen" style="display: none;width:30px;padding-bottom:30px;cursor:pointer;margin-right:5px;" src="~/Content/Images/minimize.png" />
+                                                    <img id="btnShowDevices" title="Set Devices" style="width:30px;padding-bottom:30px;cursor:pointer;margin-right:5px;" src="~/Content/Images/set-devices.png" />
+                                                    <a id="btnChatService" class="iconfont chat" title="Start Chat" style="width:30px;"></a>*@
+                                            </div>
+                                        </div>
+                                        <div class="my-video"
+                                             style="display:none;position:absolute;background:whitesmoke;height:120px;width:200px;right:0px;bottom:0px;"
+                                             id="myVideo">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="divDevicesPopUpBox" style="display: none;">
+                                <div class="devicesWrap" style="top: 12%; ">
+                                    <div class="devicesBoxHead">
+                                        Set Devices
+                                    </div>
+                                    <div class="form-horizontal">
+                                        <div class="devices-group">
+                                            <label class="control-label" for="cameras" style="width:150px;text-align:left;">Change Camera</label>
+                                            <select class="form-control" id="cameras"></select>
+                                        </div>
+
+                                        <div class="devices-group">
+                                            <label class="control-label" for="mics" style="width:150px;text-align:left;">Change Microphone</label>
+                                            <select class="form-control" id="mics"></select>
+                                        </div>
+
+                                        <div class="devices-group">
+                                            <label class="control-label" for="speakers" style="width:150px;text-align:left;">Change Speaker</label>
+                                            <select class="form-control" id="speakers"></select>
+                                        </div>
+                                        <div class="devices-group" style="text-align:center;margin-top:20px;">
+                                            <input type="button" id="btnSetDevices" value="Set" style="margin-right:20px;" />
+                                            <input type="button" id="btnHideDevices" value="Cancel" />
+                                        </div>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="divPopBox" style="display: none;">
+                <div class="innerWrap" style="top: 12%; ">
+                    <div class="videoBoxHead">
+                        Survey
+                    </div>
+                    <div id="openPopUp">
+                        <div class="feedbackWrap">
+                            <span class="feedbackHead" style="margin-top:10px">How was the call quality?</span><br />
+                            <span class="rating">
+                                <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1" value="5">
+                                <label for="rating-input-1-5" class="rating-star"></label>
+                                <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1" value="4">
+                                <label for="rating-input-1-4" class="rating-star"></label>
+                                <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1" value="3">
+                                <label for="rating-input-1-3" class="rating-star"></label>
+                                <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1" value="2">
+                                <label for="rating-input-1-2" class="rating-star"></label>
+                                <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1" value="1">
+                                <label for="rating-input-1-1" class="rating-star"></label>
+                            </span><br />
+                            <span class="feedbackHead">Audio Issues</span><br />
+                            <span style="display:inline-block;padding-top:4px">
+                                @*<input type="radio" id="yesAudio" name="AudioIssues" value="yes" style="display:block;" /> <label for="yesAudio">Yes</label>
+                                    <input type="radio" id="noAudio" name="AudioIssues" value="no" style="display:block;" checked /> <label for="noAudio">No</label>*@
+                                <input type="checkbox" class="audio" id="chkDistortedSpeech" style="margin-top:0px;" value="Distorted Speech" /><label for="chkDistortedSpeech" style="vertical-align:top; margin-left:7px">Distorted Speech</label> <br />
+                                <input type="checkbox" class="audio" id="chkBackGroundNoise" style="margin-top:0px;" value="Background Noise" /><label for="chkBackGroundNoise" style="vertical-align:top; margin-left:7px">Background Noise</label><br />
+                                <input type="checkbox" class="audio" id="chkMuffledSpeech" style="margin-top:0px;" value="Muffled Speech" /><label for="chkMuffledSpeech" style="vertical-align:top; margin-left:7px">Muffled Speech</label><br />
+                                <input type="checkbox" class="audio" id="chkEcho" style="margin-top:0px;" value="Echo" /><label for="chkEcho" style="vertical-align:top; margin-left:7px">Echo</label>
+                            </span><br />
+
+                            <span class="feedbackHead">Video Issues</span><br />
+
+                            <span style="display:inline-block;padding-top:4px">
+                                @*<input type="radio" id="yesVideo" name="VideoIssues" value="yes" style="display:block;" /> <label for="yesVideo">Yes</label>
+                                    <input type="radio" id="noVideo" name="VideoIssues" value="no" style="display:block;" checked /> <label for="noVideo">No</label>*@
+                                <input type="checkbox" class="video" id="chkDistortedVideo" value="Distorted Video" style="margin-top: 0px;" /><label for="chkDistortedVideo" style="vertical-align:top;margin-left:7px">Distorted Video</label><br />
+
+                                <input type="checkbox" class="video" id="chkHazzyVideo" value="Hazzy Video" style="margin-top:0px;" /><label for="chkHazzyVideo" style="vertical-align:top;margin-left:7px">Hazzy Video</label><br />
+                                <input type="checkbox" class="video" id="chkStuckVideo" value="Video Stuck" style="margin-top:0px;" /><label for="chkStuckVideo" style="vertical-align:top; margin-left:7px">Video Stuck</label><br />
+                            </span>
+                            <br />
+                            <div>
+                                <textarea rows="4" cols="50" id="comments" placeholder="Tell us more" name="Tell us more" style="margin-top:15px"></textarea>
+                            </div>
+                            <input type="button" class="surveyButton" id="btnAddFeedback" value="Submit" style="margin-top:25px" />
+                            <input type="button" class="surveyButton" id="divPopBoxClose" value="Close" style="margin-top:25px;margin-left:15px;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*<div id="chatPopUp">
+                    <div id="chatServiceWrap" class="chatServiceWrap">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading" id="accordion">
+                                <span class="glyphicon glyphicon-comment"></span> Chat
+                                <div class="btn-group pull-right">
+                                    <a type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                        <span class="glyphicon glyphicon-remove" id="chatClose"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div id="message-history" class="messages"></div>
+                            <div clas="">
+                                <input type="text" placeholder="Type Message here" />
+                                <input type="button" class="btnChatSendMessages" value="Send Message" id="input-message" />
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+            <div id="multipleChats"></div>
+        </div>
+    </div>
+</div>
+

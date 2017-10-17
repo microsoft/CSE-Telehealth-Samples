@@ -1,0 +1,441 @@
+﻿/**
+  * Copyright (c) Microsoft Corporation. All rights reserved.
+  * Licensed under the MIT license.
+  */
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Imported from style.css */
+/* CSS Document */
+
+body .body-content {
+    margin-top: 20px;
+}
+
+#main {
+    width: 100%;
+  
+}
+
+img {
+    border: 0;
+}
+
+.clear {
+    clear: both;
+}
+
+.header {
+   
+    background-position: center right;
+   
+    background-repeat: no-repeat;
+    padding:10px 0px 0px 10px ;
+}
+
+.logo {
+    background: url(../images/logo.jpg) no-repeat;
+    height: 78px;
+    width: 422px;
+}
+
+.content {
+    max-width: 95%;
+    margin: 0 auto;
+}
+
+.cols {
+    width: 23%; 
+    margin: 0 auto;
+    max-height: 165px;
+
+}
+
+.action-start {
+    margin: 6px auto;
+}
+
+.action-start button[disabled] {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.action-start #net_check_icon {
+    width: 24px;
+    margin-left: 1em;
+}
+
+    .cols img {
+        max-width: 100%;
+    }
+
+    .cols .msg {
+        height: 190px;
+        padding: 15px 10px 0px;
+        border: 1px solid #d3d3d3;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    #panel .msgst {
+        height: 170px;
+        padding: 15px 10px 0px;
+        border: 1px solid #d3d3d3;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width:96%;
+    }
+
+.msg p {
+    font-size: 14px;
+    color: #3c3c3c;
+}
+
+.msgst p {
+    font-size: 14px;
+    color: #3c3c3c;
+}
+
+
+.center_title {
+    background-color: #005eb8;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 25px;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    margin: 35px 0px;
+    color:#FFFFFF !important;
+}
+
+.cols h4 {
+    font-weight: normal;
+}
+
+.center_title, .cols h4 {
+    /*blue color*/
+    color: #005eb8;
+}
+
+
+.center_title, .cols sth4 {
+    /*blue color*/
+    color: #005eb8;
+}
+.btn {
+    text-decoration: none;
+    background-color: #005eb8;
+    color: #FFF;
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 20px;
+    font-weight: lighter;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 25px;
+}
+
+.note {
+    color: #C43333;
+    display: block;
+    padding-top: 4px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 1024px) {
+    .header {
+        background-image: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .cols {
+        width: 95%;
+        float: none !important;
+        margin: 10% auto;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+        .cols {
+        width:40%;
+        margin: 5%;
+    }
+}
+
+.plugin-content {
+    display:block;
+    width:100%;
+    padding-top:20%;
+    text-align:center;
+} 
+.webcam-msg, .microphone-msg{
+    position:absolute;
+    left:100px;
+    bottom:70px;
+}
+.speaker-msg {
+    position:absolute;
+    left:70px;
+    bottom:70px;
+}
+.audio-control {
+    margin-top:25px;
+}
+.tab-content .button-container input[type=button]:disabled{
+                background-image: url('data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20%3F%3E%3Csvg%20xmlns%3�22%20height%3D%221%22%20fill%3D%22url(%23gradient)%22%20%2F%3E%3C%2Fsvg%3E');
+                background-image: -webkit-gradient(linear, left top, left bottom, from(#9d9d9d), to(#777));
+                background-image: -webkit-linear-gradient(top, #9d9d9d, #777);
+                background-image: linear-gradient(to bottom, #9d9d9d, #777);font-size: 16px;
+                border:none;color:#fff;padding:5px 30px;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;max-width:100px;margin:0 5px;    font-family: 'Open Sans', Arial, "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", sans-serif;
+                font-weight: bold;
+                cursor:not-allowed;
+} 
+.tab-content .button-container input[type=button]:disabled:hover{ 
+                background-image: url('data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20%3F%3E%3Csvg%20xmlns%3�22%20height%3D%221%22%20fill%3D%22url(%23gradient)%22%20%2F%3E%3C%2Fsvg%3E');
+                background-image: -webkit-gradient(linear, left top, left bottom, from(#9d9d9d), to(#777));
+                background-image: -webkit-linear-gradient(top, #9d9d9d, #777);
+                background-image: linear-gradient(to bottom, #9d9d9d, #777);
+                cursor:not-allowed;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.loading-text {
+    font-size: large;
+    color: white;
+    text-align: center;
+    width: 342px;
+    margin: 12px auto;
+    line-height: 28px;
+}
+.landing-text {
+    font-size: 30px;
+    color: white;
+    text-align: center;
+}
+
+.loading-content {
+    height: 40px;
+    position: absolute;
+    top: 40%;
+    display:block;
+    text-align:center;
+    width:100%
+}
+
+.surveyButton {
+        margin-top: 20px;
+        background-color: white;
+        border: 1px #00a1de solid;
+        color: #00a1de;
+        height: 30px;
+        padding: 3px;
+        font-size: 12px;
+        width: 100px;
+    }
+
+
+    .audio {
+        margin-right: 7px;
+    }
+
+    #divPopBox {
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        background-color: rgba(0,0,0,.6);
+        z-index: 1100;
+        display: none;
+    }
+
+
+    .innerWrap {
+        height: 560px !important;
+        width: 400px;
+        background-color: white;
+        z-index: 1101;
+        position: relative;
+        top: 10% !important;
+        margin: 0 auto;
+    }
+
+
+    #openPopUp {
+        width: 350px;
+        margin: auto;
+    }
+
+    
+
+    .videoBoxHead {
+        height: 34px;
+        background-color: white;
+        font-size: 16px;
+        color: black;
+        font-weight: 300;
+        padding-left: 168px;
+        padding-top: 10px;
+        width: 87.2%;
+        float: left;
+        text-transform: uppercase;
+    }
+
+
+    .feedbackHead {
+        color: #00a1de;
+        font-weight: bold;
+        margin-top: 5px;
+        display: inline-block;
+    }
+
+
+
+    .rating {
+        overflow: hidden;
+        display: inline-block;
+        font-size: 0;
+        position: relative;
+        padding-top: 4px;
+    }
+
+    .rating-input {
+        float: right;
+        width: 16px;
+        height: 16px;
+        padding: 0;
+        margin: 0 0 0 -16px;
+        opacity: 0;
+    }
+
+        .rating:hover .rating-star:hover,
+        .rating:hover .rating-star:hover ~ .rating-star,
+        .rating-input:checked ~ .rating-star {
+            background-position: 0 0;
+        }
+
+    .rating-star,
+    .rating:hover .rating-star {
+        position: relative;
+        float: right;
+        display: block;
+        width: 16px;
+        height: 16px;
+        background: url('https://www.everythingfrontend.com/samples/star-rating/star.png') 0 -16px; /*http://kubyshkin.ru/samples/star-rating/star.png*/
+    }
+    .videoClass{
+        display:table-row;
+        border:1px solid white;
+    }
+    .videoName{
+        position:absolute;
+        bottom:10px;
+        left:5px;
+        font-size:20px;
+        font-weight:bold;
+        color:white;
+    }
+
+    .right-arrow {
+        background:url('/Content/Images/questionnaire-right-arrow.png') no-repeat left top;
+        width:30px;
+        height:30px;
+        cursor:pointer;
+    }
+    .left-arrow {
+        background:url('/Content/Images/questionnaire-left-arrow.png') no-repeat left top;
+        width:30px;
+        height:30px;
+        cursor:pointer;
+    }
+
+    .devices-group {
+        margin-left: 50px;
+        margin-bottom:15px;
+    }
+    .devices-group label, .devices-group select {
+        display: inline-block;
+    }
+
+    #divDevicesPopUpBox {
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        background-color: rgba(0,0,0,.6);
+        z-index: 1100;
+        display: none;
+    }
+
+
+    .devicesWrap {
+        /*height: 560px !important;*/
+        width: 600px;
+        background-color: white;
+        z-index: 1101;
+        position: relative;
+        top: 20% !important;
+        margin: 0 auto;
+        border-radius:10px;
+    }
+
+    .devicesBoxHead {
+        font-size: 18px;
+        color: rgba(66, 139, 202, 1);
+        font-weight: bold;
+        padding-top: 15px;
+        padding-bottom:30px;
+        width: 87.2%;
+        float: left;
+        text-transform: uppercase;
+        text-align:center;
+    }
+
+    #openDevicesPopUp {
+        width: 350px;
+        margin: auto;
+    }
+
+#questionControllerDiv > .ng-scope {
+display:table;
+width:100%;
+}
+.defaultbrowser{
+    border:1px solid black;
+}
+
+#downloadPlugins {
+    padding-top: 1em;
+}
+
+#downloadPlugins .error {
+    color: red;
+}

@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Meeting Listener";
+}
+
+@section scripts {
+    <script type="text/javascript" src="https://swx.cdn.skype.com/shared/v/1.2.15/SkypeBootstrap.min.js"></script>
+    @Scripts.Render("~/Scripts/skype.js")
+    @Scripts.Render("~/Scripts/clinic.js")
+}
+
+@Html.Partial("_MeetingConfigPartial")
+
+@Html.Partial("_Navbar")
+
+<div class="row">
+    <div class="col-xs-7">
+        <div id="skype-cc"></div>
+    </div>
+    <div class="col-xs-3">
+        Meeting Lobby:
+        <ul id="admit"></ul>
+    </div>
+</div>

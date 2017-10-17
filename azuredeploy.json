@@ -1,0 +1,297 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "baseName": {
+            "defaultValue": "telehealth",
+            "type": "string"
+        },
+        "database_server_name": {
+            "defaultValue": "telehealth-azsql",
+            "type": "string"
+        },
+        "database_db_name": {
+            "defaultValue": "telehealth-db",
+            "type": "string"
+        },
+        "appservice_plan_name": {
+            "defaultValue": "telehealthweb",
+            "type": "string"
+        },
+        "sqlAdministratorLogin": {
+            "type": "string"
+        },
+        "sqlAdministratorLoginPassword": {
+            "type": "string"
+        }
+    },
+    "variables": {
+        "storageAccountName": "[concat(uniqueString(resourceGroup().id), 'storage')]",
+        "serviceBusName": "[parameters('baseName')]",
+        "serviceBusKeyName": "[concat(variables('serviceBusName'), '/RootManageSharedAccessKey')]",
+        "serviceBusAuthRulesId": "[resourceId('Microsoft.ServiceBus/namespaces/authorizationRules', variables('serviceBusName'), 'RootManageSharedAccessKey')]",
+        "apiBaseName": "[concat(parameters('baseName'), '-web')]",
+        "webPortalBaseName": "[concat(parameters('baseName'), '-api')]",
+        "trustedAppBaseName": "[concat(parameters('baseName'), '-trustedapp')]",
+        "apiSiteName": "[concat(variables('apiBaseName'), '/web')]",
+        "webPortalSiteName": "[concat(variables('webPortalBaseName'), '/web')]",
+        "trustedAppSiteName": "[concat(variables('trustedAppBaseName'), '/web')]",
+        "apiInsightsName": "[concat(variables('apiBaseName'), '-ai')]",
+        "webPortalInsightsName" : "[concat(variables('webPortalBaseName'), '-ai')]",
+        "trustedAppInsightsName" : "[concat(variables('trustedAppBaseName'), '-ai')]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[variables('storageAccountName')]",
+            "apiVersion": "2016-01-01",
+            "location": "centralus",
+            "properties": {},
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[concat(parameters('baseName'), '-vnet')]",
+            "apiVersion": "2017-03-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "172.16.11.0/24"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "default",
+                        "properties": {
+                            "addressPrefix": "172.16.11.0/24"
+                        }
+                    }
+                ],
+                "virtualNetworkPeerings": []
+            },
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.ServiceBus/namespaces",
+            "sku": {
+                "name": "Basic",
+                "tier": "Basic"
+            },
+            "kind": "Messaging",
+            "name": "[variables('serviceBusName')]",
+            "apiVersion": "2015-08-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "provisioningState": "Succeeded",
+                "status": "Active",
+                "createdAt": "2017-02-13T22:54:37.623Z",
+                "serviceBusEndpoint": "[concat('https://', parameters('baseName'),'.servicebus.windows.net:443/')]",
+                "enabled": true,
+                "updatedAt": "2017-02-13T22:55:00.86Z"
+            },
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.ServiceBus/namespaces/AuthorizationRules",
+            "name": "[variables('serviceBusKeyName')]",
+            "apiVersion": "2015-08-01",
+            "properties": {
+                "rights": [
+                    "Listen",
+                    "Manage",
+                    "Send"
+                ]
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusName'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Sql/servers",
+            "kind": "v12.0",
+            "name": "[parameters('database_server_name')]",
+            "apiVersion": "2014-04-01-preview",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "administratorLogin": "[parameters('sqlAdministratorLogin')]",
+                "administratorLoginPassword": "[parameters('sqlAdministratorLoginPassword')]",
+                "version": "12.0"
+            },
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.Sql/servers/databases",
+            "kind": "v12.0,user",
+            "name": "[concat(parameters('database_server_name'), '/', parameters('database_db_name'))]",
+            "apiVersion": "2014-04-01-preview",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "edition": "Basic",
+                "collation": "SQL_Latin1_General_CP1_CI_AS",
+                "maxSizeBytes": "1073741824",
+                "requestedServiceObjectiveName": "Basic"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/servers', parameters('database_server_name'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Sql/servers/firewallRules",
+            "kind": "v12.0",
+            "name": "[concat(parameters('database_server_name'), '/AllowAllWindowsAzureIps')]",
+            "apiVersion": "2014-04-01-preview",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "startIpAddress": "0.0.0.0",
+                "endIpAddress": "0.0.0.0"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/servers', parameters('database_server_name'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Web/serverfarms",
+            "sku": {
+                "name": "B1",
+                "capacity": 1
+            },
+            "kind": "app",
+            "name": "[parameters('appservice_plan_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "name": "[parameters('appservice_plan_name')]"
+            },
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "kind": "app",
+            "name": "[variables('trustedAppBaseName')]",
+            "apiVersion": "2015-08-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "name": "[variables('trustedAppBaseName')]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appservice_plan_name'))]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('appservice_plan_name'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "kind": "WebApp",
+            "name": "[variables('apiBaseName')]",
+            "apiVersion": "2015-08-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "name": "[variables('apiBaseName')]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appservice_plan_name'))]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('appservice_plan_name'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "kind": "WebApp",
+            "name": "[variables('webPortalBaseName')]",
+            "apiVersion": "2015-08-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "name": "[variables('webPortalBaseName')]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appservice_plan_name'))]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('appservice_plan_name'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "name": "[variables('trustedAppSiteName')]",
+            "apiVersion": "2015-08-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "webSocketsEnabled": true,
+                "alwaysOn": true
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', variables('trustedAppBaseName'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "name": "[variables('apiSiteName')]",
+            "apiVersion": "2015-08-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "alwaysOn": true
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', variables('apiBaseName'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "name": "[variables('webPortalSiteName')]",
+            "apiVersion": "2015-08-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "webSocketsEnabled": true,
+                "alwaysOn": true
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', variables('webPortalBaseName'))]"
+            ]
+        },
+        {
+            "type": "microsoft.insights/components",
+            "kind": "web",
+            "name": "[variables('trustedAppInsightsName')]",
+            "apiVersion": "2014-04-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "ApplicationId": "[variables('trustedAppSiteName')]"
+            },
+            "dependsOn": []
+        },
+        {
+            "type": "microsoft.insights/components",
+            "kind": "web",
+            "name": "[variables('webPortalInsightsName')]",
+            "apiVersion": "2014-04-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "ApplicationId": "[variables('webPortalSiteName')]"
+            },
+            "dependsOn": []
+        },
+        {
+            "type": "microsoft.insights/components",
+            "kind": "web",
+            "name": "[variables('apiInsightsName')]",
+            "apiVersion": "2014-04-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "ApplicationId": "[variables('apiSiteName')]"
+            },
+            "dependsOn": []
+        }
+    ],
+    "outputs": {
+      "ServiceBusConnectionString": {
+            "type": "string",
+            "value": "[listkeys(variables('serviceBusAuthRulesId'), '2015-08-01').primaryConnectionString]"
+        },
+        "StorageConnectionString": {
+            "type": "string",
+            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value)]"
+        }
+    }
+}
