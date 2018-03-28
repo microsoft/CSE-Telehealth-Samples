@@ -60,7 +60,7 @@ namespace CSETHSamples_WebPortal.Controllers
             ViewBag.MeetingConferenceUri = meetingConferenceUri;
             ViewBag.MeetingJoinUrl = meetingJoinUrlStr;
             ViewBag.MeetingId = meetingId;
-            ViewBag.ClientId = WebConfigurationManager.AppSettings["AAD_ClientId"];
+            ViewBag.ClientId = WebConfigurationManager.AppSettings["AAD_Native_ClientId"];
             ViewBag.SkypeUseConversationControl = WebConfigurationManager.AppSettings["SkypeUseConversationControl"];
             ViewBag.SkypeServiceUrl = WebConfigurationManager.AppSettings["SkypeServiceUrl"];
             ViewBag.WebPortalBaseUrl = WebConfigurationManager.AppSettings["WebPortalBaseUrl"];

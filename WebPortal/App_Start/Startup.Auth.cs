@@ -19,8 +19,8 @@ namespace CSETHSamples_WebPortal
 {
     public partial class Startup
     {
-        private static string clientId = ConfigurationManager.AppSettings["AAD_ClientId"];
-        private static string appKey = ConfigurationManager.AppSettings["AAD_ClientSecret"];
+        private static string clientId = ConfigurationManager.AppSettings["AAD_Web_ClientId"];
+        private static string appKey = ConfigurationManager.AppSettings["AAD_Web_ClientSecret"];
         private static string aadInstance = ConfigurationManager.AppSettings["AAD_AuthorityUri"];
         private static string tenantId = ConfigurationManager.AppSettings["AAD_TenantId"];
         private static string domain = ConfigurationManager.AppSettings["AAD_Domain"];

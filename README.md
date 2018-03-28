@@ -33,21 +33,35 @@ For local testing, proceed with directions below and use the local testing URLs 
 
 
 ### Azure AD application registration
-Two applications are required to deploy the solution. One enables authentication against UCWA and the Web SDK (delegated permissions) in the Web Portal, API and Tray Listener projects, and the other that will be used for the web service implementing the Trusted App API (application permissions).
+Three Azure AD application registrations are required to deploy the solution:
+
+1. Web Portal (Native): Enables use of UCWA and the Web SDK (delegated permissions) in the Web Portal, API and Tray Listener projects
+2. Web Portal (Web/API): Enables AAD user authentication (delegated permissions) for the web portal
+3. Trusted App (Web/API): Enables use of the Skype for Business Trusted App API (application permissions)
 
 #### 1. Web SDK & UCWA
 This AAD application will be used to authenticate the Web SDK and UCWA. In the Azure Portal, go to *Azure Active Directory (AAD) > App Registrations* and configure a new *Native* type application.
-- Under *Reply URLs*, remove the default reply URL and add two more:
+1. Under *Reply URLs*, remove the default reply URL and add two more:
     - `https://WebPortalFQDN/Content/token.html`
     - `https://WebPortalFQDN/`
 
     Refer to the table above for setting `WebPortalFQDN` if testing on a local machine with Visual Studio.
 2. Under *Required Permissions*, select the *Skype for Business Online* API and grant it all available **delegated** permissions. If you can't find that API listed, try entering `Microsoft.Lync` into the search.
-3. Under *Keys*, add a client secret and copy its value - you will need it later.
-4. Close out the *Settings* blade to return to the application's essentials blade, and press the *Manifest* button to edit the application Manifest
+3. Close out the *Settings* blade to return to the application's essentials blade, and press the *Manifest* button to edit the application Manifest
     - Change the `oauth2AllowImplicitFlow` property to `true`, and save the manifest.
 
-#### 2. Trusted Application
+#### 2. Web Portal authentication
+This AAD application will be used to authenticate users of the web portal. In the Azure Portal, go to *Azure Active Directory (AAD) > App Registrations* and configure a new *Web/API* type application.
+
+1. Under *Reply URLs*, remove the default reply URL and add two more:
+    - `https://WebPortalFQDN/Content/token.html`
+    - `https://WebPortalFQDN/`
+    
+    Refer to the table above for setting `WebPortalFQDN` if testing on a local machine with Visual Studio.
+2. Under *Required Permissions*, select the *Skype for Business Online* API and grant it all available **delegated** permissions. If you can't find that API listed, try entering `Microsoft.Lync` into the search.
+3. Under *Keys*, add a client secret and copy its value - you will need it later.
+
+#### 3. Trusted Application
 This AAD application will be used by your Trusted App web service to authenticate against the Skype for Business Trusted Application API.
 
 Use the [quick registration tool](https://aka.ms/skypeappregistration) to register a new Trusted Application (detailed registration instructions [here](https://msdn.microsoft.com/en-us/skype/trusted-application-api/docs/sfbregistration)):
@@ -128,7 +142,7 @@ Doctor clicks the admit link on the clinic join page to kick off the meeting. Th
 ## FAQ
 #### 1. What's the difference between an Azure AD Application, Trusted Application and the Trusted Application API?
 This documentation has taken care to use careful wording given the ambiguous nature of the word *Application*.
-- Azure AD Application: Used to authenticate against Azure AD and provide access to Skype APIs.
+- Azure AD Application: Used to authenticate users with Azure AD and request access to user resources, e.g. access to Skype for Business Online APIs.
 - Trusted Application: Web service that implements (consumes) the Trusted App API so that it can interact with your tenant's users and Skype for Business meetings autonomously. In this code sample, it interacts with Skype for Business meetings upon request via a high-level REST API.
 - Trusted Application API: API offered by Microsoft with Skype for Business Online
 
