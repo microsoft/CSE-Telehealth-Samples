@@ -71,7 +71,7 @@ Use the [quick registration tool](https://aka.ms/skypeappregistration) to regist
 4. Open the consent URL in a new tab, and sign-in as your O365 tenant admin account again. After accepting the requested application premissions, you will be redirected to a 'page not found' - this is expected... You can close the tab/window.
 5. Download and install the [Skype for Business Online Windows PowerShell Module](http://www.microsoft.com/en-us/download/details.aspx?id=39366)
 6. Open a new PowerShell window and run: `Import-PSSession (New-CsOnlineSession -Credential (Get-Credential))`. Enter a O365 tenant admin account's credentials when prompted.
-7. Paste the PowerShell line from the registration tool, replacing `sample_endpoint@domain.com` with your desired SIP endpoint (e.g. `telehealthApp@yourtenant.onmicrosoft.com`) and run it.
+7. Paste the PowerShell line from the registration tool, replacing `sampleendpoint@domain.com` with your desired SIP endpoint (e.g. `telehealthapp@yourtenant.onmicrosoft.com`) and run it. Note that it should be all lowercase.
 8. Save the resulting output in your records, it will come in handy if you ever need to alter the trusted application registration.
 
 ### Configure Web Portal & API projects
