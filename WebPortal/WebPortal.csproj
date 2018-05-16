@@ -26,6 +26,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <WebProject_DirectoryAccessLevelKey>1</WebProject_DirectoryAccessLevelKey>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -267,37 +268,14 @@
   <ItemGroup>
     <Content Include="Content\Audio\WATER.mp3" />
     <Content Include="fonts\SkypeIcon.svg" />
-    <Content Include="Content\Images\appt_barChart.png" />
-    <Content Include="Content\Images\appt_calories.png" />
-    <Content Include="Content\Images\appt_chart.png" />
-    <Content Include="Content\Images\appt_clock.png" />
-    <Content Include="Content\Images\appt_downArrow.png" />
-    <Content Include="Content\Images\appt_endCall.png" />
-    <Content Include="Content\Images\appt_expand.png" />
-    <Content Include="Content\Images\appt_greenArrow.png" />
-    <Content Include="Content\Images\appt_mic.png" />
-    <Content Include="Content\Images\appt_plus.png" />
-    <Content Include="Content\Images\appt_redArrow.png" />
-    <Content Include="Content\Images\appt_sleep.png" />
-    <Content Include="Content\Images\appt_steps.png" />
-    <Content Include="Content\Images\appt_upArrow.png" />
-    <Content Include="Content\Images\appt_video.png" />
     <Content Include="Content\Images\call-end.png" />
-    <Content Include="Content\Images\cal_drPhoto.png" />
-    <Content Include="Content\Images\cal_jeremyPhoto.png" />
-    <Content Include="Content\Images\cal_katePhoto.png" />
-    <Content Include="Content\Images\cal_scheduleIcon.png" />
-    <Content Include="Content\Images\cal_YinaPhoto.png" />
     <Content Include="Content\Images\chat-service.png" />
     <Content Include="Content\Images\conference-arrow.png" />
     <Content Include="Content\Images\devices.png" />
-    <Content Include="Content\Images\headshot.png" />
     <Content Include="Content\Images\hide-my-vid.png" />
     <Content Include="Content\Images\hide-others-vid.png" />
-    <Content Include="Content\Images\lamnaHealthcare.png" />
     <Content Include="Content\Images\left-arrow.png" />
     <Content Include="Content\Images\loading_comments.gif" />
-    <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\maximize.png" />
     <Content Include="Content\Images\minimize.png" />
     <Content Include="Content\Images\mute.png" />
@@ -309,34 +287,12 @@
     <Content Include="Content\Images\set-devices.png" />
     <Content Include="Content\Images\show-my-vid.png" />
     <Content Include="Content\Images\show-others-vid.png" />
-    <Content Include="Content\Images\skype-background.png" />
-    <Content Include="Content\Images\skype-logo.png" />
-    <Content Include="Content\Images\spinner.gif" />
     <Content Include="Content\Images\tick.png" />
     <Content Include="Content\Images\un-mute.png" />
     <Content Include="Content\Images\video.png" />
-    <Content Include="Content\Images\yina_headshot.png" />
-    <Content Include="Content\img\don.jpg" />
-    <Content Include="Content\img\evan.jpg" />
-    <Content Include="Content\img\generic.png" />
     <Content Include="Content\img\ICON_32x32_SystemTest_Network_Attention.png" />
     <Content Include="Content\img\ICON_32x32_SystemTest_Network_Success.png" />
     <Content Include="Content\img\ICON_32x32_SystemTest_Network_Warning.png" />
-    <Content Include="Content\img\InLobby.png" />
-    <Content Include="Content\img\james.jpg" />
-    <Content Include="Content\img\jeff.png" />
-    <Content Include="Content\img\layout3-1.png" />
-    <Content Include="Content\img\layout3-2.png" />
-    <Content Include="Content\img\layout3-3.png" />
-    <Content Include="Content\img\layout4-1.png" />
-    <Content Include="Content\img\layout4-2.png" />
-    <Content Include="Content\img\layout4-3.png" />
-    <Content Include="Content\img\layout4-4.png" />
-    <Content Include="Content\img\layout4-5.png" />
-    <Content Include="Content\img\ParticipantInLobby.png" />
-    <Content Include="Content\img\shelby.jpg" />
-    <Content Include="Content\img\skype.png" />
-    <Content Include="Content\img\skypeEndCall.png" />
     <Content Include="Content\multivideo.css" />
     <Content Include="Content\skypestyle.css" />
     <Content Include="Content\speedtest.css" />
