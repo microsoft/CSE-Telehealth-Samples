@@ -68,7 +68,7 @@ Use the [quick registration tool](https://aka.ms/skypeappregistration) to regist
 1. Name your application something descriptive (e.g. `TelehealthTrustedApp`). Choose the first option, *I have not created an app in the Azure portal.* This is a new app, different from the web app you may have registered in the Azure portal.
 2. Under application permissions, select *Create on-demand Skype meetings meetings*, *Join and Manage Skype Meetings meetings*, and *Guest user join services anonymous*.
 3. Click *Create my application* and note down the application ID and client secret for later.
-4. Open the consent URL in a new tab, and sign-in as your O365 tenant admin account again. After accepting the requested application premissions, you will be redirected to a 'page not found' - this is expected... You can close the tab/window.
+4. Open the consent URL in a new tab, and sign-in as your O365 tenant admin account again. After accepting the requested application permissions, you will be redirected to a 'page not found' - this is expected... You can close the tab/window.
 5. Download and install the [Skype for Business Online Windows PowerShell Module](http://www.microsoft.com/en-us/download/details.aspx?id=39366)
 6. Open a new PowerShell window and run: `Import-PSSession (New-CsOnlineSession -Credential (Get-Credential))`. Enter a O365 tenant admin account's credentials when prompted.
 7. Paste the PowerShell line from the registration tool, replacing `sampleendpoint@domain.com` with your desired SIP endpoint (e.g. `telehealthapp@yourtenant.onmicrosoft.com`) and run it. Note that it should be all lowercase.
@@ -91,7 +91,7 @@ If you wish to use the Tray Listener to launch meetings on the desktop environme
 If you wish to use Application Insights, create an App Insights resource for each of the three web projects above and note down their Instrumentation Keys from the *Properties* blade in the Azure Portal. Edit the `ApplicationInsights.config` contained in each project folder and substitute the respective key into the `<InstrumentationKey>` element at the end of the file, then re-deploy the project to your App Service.
 
 ### Automated deployment to Azure
-An ARM template is included to automatically create the three App Services as well as all dependenices. To use it, alter the `azuredeploy.parameters.json` file folder then run:
+An ARM template is included to automatically create the three App Services as well as all dependencies. To use it, alter the `azuredeploy.parameters.json` file folder then run:
 ```
 cd build
 az group create --name YOUR_RG_NAME --location 'eastus'
