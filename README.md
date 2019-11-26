@@ -8,6 +8,8 @@ At a high level, it provides:
 3. An API for relaying events and user feedback into 3rd party application(s) via REST calls. Example implementation that logs call quality, call length, a patient's device test status to a text file is included in these samples.
 4. A workaround for VDI environments to launch Skype for Business on the desktop environment when clicking links in a virtual environment
 
+**Note: These samples were built using Skype for Business Online, which is now scheduled for retirement. [Read more here](https://docs.microsoft.com/en-us/microsoftteams/faq-journey#skype-for-business-online-retirement)** about the migration to Microsoft Teams.
+
 ## License
 This project is licensed under the MIT license. See the included LICENSE file for details.
 
@@ -190,7 +192,7 @@ If you need to troubleshoot further, open your browser's inspector or developer 
 
 ## Roadmap & Development
 ### Questions, issues and feedback
-Please open an issue if you discover a bug or have feedback for us. Questions can be directed to [9269db0d.microsoft.com@amer.teams.ms](mailto:9269db0d.microsoft.com@amer.teams.ms).
+Please open an issue if you discover a bug or have feedback for us.
 
 ### Upcoming features
 Features that are planned or in development are submitted to the issue queue and tagged with the release version.
